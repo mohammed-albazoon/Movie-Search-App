@@ -37,7 +37,7 @@ describe('App Component', () => {
 
     
     // Assert: Check that title is displayed
-    expect(screen.getByText(/Movie Search App/i)).toBeInTheDocument();
+    expect(screen.getByText(/MoodCast/i)).toBeInTheDocument();
 
     // Wait for async operations to complete (removes act() warning)
     await waitFor(() => {
@@ -314,7 +314,7 @@ describe('Edge Cases & Error Handling', () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
 
     // App should still render the title (didn't crash)
-    expect(screen.getByText(/Movie Search App/i)).toBeInTheDocument();
+    expect(screen.getByText(/MoodCast/i)).toBeInTheDocument();
 
     // App should still show the search input
     expect(screen.getByPlaceholderText(/Search for a movie/i)).toBeInTheDocument();

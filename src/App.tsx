@@ -292,11 +292,12 @@ function App() {
     window.open(`https://www.imdb.com/title/${imdbID}/videogallery/`, '_blank');
   };
 
-  // Render movie card
-  const renderCard = (movie: Movie) => (
+  // Render movie card with staggered animation
+  const renderCard = (movie: Movie, index: number) => (
     <div
       key={movie.imdbID}
       className={`movie-card ${hoveredMovie?.imdbID === movie.imdbID ? 'is-previewing' : ''}`}
+      style={{ '--card-index': Math.min(index, 20) } as React.CSSProperties}
       ref={(el) => {
         if (el) cardRefs.current.set(movie.imdbID, el);
       }}
@@ -306,7 +307,7 @@ function App() {
     >
       <div className="movie-card-inner">
         {movie.Poster !== "N/A" ? (
-          <img src={movie.Poster} alt={movie.Title} />
+          <img src={movie.Poster} alt={movie.Title} loading="lazy" />
         ) : (
           <div className="poster-placeholder">
             <span>No Image</span>
@@ -464,51 +465,63 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>Movie Search App 🎬</h1>
-
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search for a movie..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-        />
-        <button onClick={handleSearch}>Search</button>
-        
-        {/* NEW: Preview mode toggle */}
-        <div className="preview-mode-toggle">
-          <button
-            className={`toggle-btn ${previewMode === 'expand' ? 'active' : ''}`}
-            onClick={() => setPreviewMode('expand')}
-            title="Expand in place"
-          >
-            ⬚
-          </button>
-          <button
-            className={`toggle-btn ${previewMode === 'modal' ? 'active' : ''}`}
-            onClick={() => setPreviewMode('modal')}
-            title="Center modal"
-          >
-            ▣
-          </button>
-        </div>
+      {/* Ambient background with animated gradient blobs */}
+      <div className="ambient-background">
+        <div className="ambient-blob ambient-blob--primary" />
+        <div className="ambient-blob ambient-blob--secondary" />
+        <div className="ambient-blob ambient-blob--tertiary" />
+        <div className="ambient-blob ambient-blob--bottom" />
       </div>
 
-      {movies.length === 0 && suggested.length > 0 && (
-        <>
-          <h2>Suggested for you 🍿</h2>
-          <div className="movies-grid">
-            {suggested.map(renderCard)}
-          </div>
-        </>
-      )}
+      {/* Main content */}
+      <div className="app-content">
+        <h1 className="app-title text-gradient">MoodCast</h1>
 
-      {movies.length > 0 && (
-        <div className="movies-grid">
-          {movies.map(renderCard)}
+        <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search for a movie..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          />
+          <button className="search-btn" onClick={handleSearch}>Search</button>
+
+          {/* Preview mode toggle */}
+          <div className="preview-mode-toggle">
+            <button
+              className={`toggle-btn ${previewMode === 'expand' ? 'active' : ''}`}
+              onClick={() => setPreviewMode('expand')}
+              title="Expand in place"
+            >
+              ⬚
+            </button>
+            <button
+              className={`toggle-btn ${previewMode === 'modal' ? 'active' : ''}`}
+              onClick={() => setPreviewMode('modal')}
+              title="Center modal"
+            >
+              ▣
+            </button>
+          </div>
         </div>
-      )}
+
+        {movies.length === 0 && suggested.length > 0 && (
+          <>
+            <h2 className="section-title">Suggested for you</h2>
+            <div className="movies-grid">
+              {suggested.map((movie, index) => renderCard(movie, index))}
+            </div>
+          </>
+        )}
+
+        {movies.length > 0 && (
+          <div className="movies-grid">
+            {movies.map((movie, index) => renderCard(movie, index))}
+          </div>
+        )}
+      </div>
 
       {/* Expanded preview portal */}
       {renderExpandedPreview()}
