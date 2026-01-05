@@ -1,6 +1,6 @@
-# Movie Search App
+# MoodCast
 
-A feature-rich React application for discovering movies with weather-based suggestions, Netflix-style previews, and auto-playing trailers.
+A feature-rich React application for discovering movies with weather-based suggestions, Netflix-style previews, and auto-playing trailers. Your mood, your movies.
 
 ## Features
 
@@ -8,6 +8,7 @@ A feature-rich React application for discovering movies with weather-based sugge
 - **Movie Search** — Search movies using the OMDB API with pagination (up to 100 results)
 - **Weather-Based Suggestions** — Get personalized movie recommendations based on your local weather
 - **Netflix-Style Previews** — Hover over any movie card to see an expanded preview with trailer
+- **Modern Dark Theme** — Sleek dark UI with ambient gradient backgrounds
 
 ### Preview System
 - **Two Preview Modes:**
@@ -32,6 +33,7 @@ A feature-rich React application for discovering movies with weather-based sugge
 
 - **React 19** with TypeScript
 - **Vite 7** — Build tool & dev server
+- **Tailwind CSS 4** — Utility-first styling
 - **Vitest** — Unit & integration testing
 - **React Testing Library** — Component testing
 - **OMDB API** — Movie search data
@@ -48,10 +50,10 @@ A feature-rich React application for discovering movies with weather-based sugge
 
 ```bash
 # Clone the repository
-git clone https://github.com/mohammed-albazoon/movie-search-app.git
+git clone https://github.com/mohammed-albazoon/MoodCast.git
 
 # Navigate to the project
-cd movie-search-app
+cd MoodCast
 
 # Install dependencies
 npm install
@@ -76,7 +78,9 @@ Get a free API key at [themoviedb.org](https://www.themoviedb.org/settings/api)
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server |
+| `npm run build` | Build for production |
 | `npm test` | Run tests |
+| `npm run deploy` | Deploy to GitHub Pages |
 
 ## Testing
 
@@ -121,10 +125,14 @@ src/
 - **TMDB API** — YouTube trailer keys
 - **Open-Meteo API** — Weather data by coordinates
 
+## Live Demo
+
+[https://mohammed-albazoon.github.io/MoodCast](https://mohammed-albazoon.github.io/MoodCast)
+
 ## Acknowledgements
 
 - [OMDB API](https://www.omdbapi.com/) for movie data
 - [TMDB](https://www.themoviedb.org/) for trailer integration
 - [Open-Meteo](https://open-meteo.com/) for weather data
 - [Vite](https://vitejs.dev/) for the blazing fast build tool
-
+- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling

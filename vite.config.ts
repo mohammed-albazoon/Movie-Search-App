@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/movie-search-app/',
+  base: '/MoodCast/',
   plugins: [react()],
   test: {
     globals: true,
